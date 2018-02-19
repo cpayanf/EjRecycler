@@ -18,15 +18,15 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
     ArrayList<Contacto> goContactos;
 
     public static class ContactoViewHolder extends RecyclerView.ViewHolder{
-        private ImageView imgFoto;
-        private TextView txtNombreCV;
-        private TextView txtTelefonoCV;
+        private ImageView imgFotoCont;
+        private TextView txtNombreCont;
+        private TextView txtTelefonoCont;
 
         public ContactoViewHolder(View itemView) {
             super(itemView);
-            imgFoto = itemView.findViewById(R.id.imgFotoCont);
-            txtNombreCV = itemView.findViewById(R.id.txtNombreCont);
-            txtTelefonoCV = itemView.findViewById(R.id.txtTelefonoCont);
+            imgFotoCont = itemView.findViewById(R.id.imgFotoCont);
+            txtNombreCont = itemView.findViewById(R.id.txtNombreCont);
+            txtTelefonoCont = itemView.findViewById(R.id.txtTelefonoCont);
         }
     }
 
@@ -44,9 +44,9 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
     @Override
     public void onBindViewHolder(ContactoViewHolder holder, int position) {
         Contacto loContacto = goContactos.get(position);
-        holder.txtNombreCV.setText(loContacto.getNombre());
-        holder.txtTelefonoCV.setText(loContacto.getTelefono());
-        holder.imgFoto.setImageResource(loContacto.getFoto());
+        holder.txtNombreCont.setText(loContacto.getNombre());
+        holder.txtTelefonoCont.setText(loContacto.getTelefono());
+        holder.imgFotoCont.setImageResource(loContacto.getFoto());
     }
 
     @Override
