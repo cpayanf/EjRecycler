@@ -2,6 +2,7 @@ package com.indicode.cpayanf.ejrecycler;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -24,15 +25,20 @@ public class MainActivity extends AppCompatActivity {
         gaContactos.add(new Contacto("luisa enra", "866342", "algoes@gmail", R.drawable.farmer80));
 
         rvwContactos = findViewById(R.id.rvwContactos);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        rvwContactos.setLayoutManager(llm);
+        /***Si se quiere lineal
+        LinearLayoutManager lmgContactos = new LinearLayoutManager(this);
+		 lmgContactos.setOrientation(LinearLayoutManager.VERTICAL);
+		 */
+        //para grid
+		GridLayoutManager lmgContactos = new GridLayoutManager(this, 2);
+
+        rvwContactos.setLayoutManager(lmgContactos);
         InicializarAdaptador(gaContactos);
     }
 
     protected void InicializarAdaptador(ArrayList<Contacto> paContactos)
     {
-        ContactoAdapter cadContactos = new ContactoAdapter(paContactos);
+        ContactoAdapter cadContactos = new ContactoAdapter(paContactos, this);
         rvwContactos.setAdapter(cadContactos);
     }
 }

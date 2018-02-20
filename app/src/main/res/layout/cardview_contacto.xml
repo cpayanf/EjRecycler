@@ -15,8 +15,10 @@
         <ImageView
             android:id="@+id/imgFotoCont"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/overwolf500px"/>
+            android:layout_height="120dp"
+            android:src="@drawable/overwolf500px"
+            android:scaleType="fitCenter"
+            />
 
         <TextView
             android:id="@+id/txtNombreCont"

@@ -1,5 +1,7 @@
 package com.indicode.cpayanf.ejrecycler;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +18,8 @@ import java.util.ArrayList;
 
 public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.ContactoViewHolder> {
     ArrayList<Contacto> goContactos;
+    Activity ActRecycler;
+    int piPosicion;
 
     public static class ContactoViewHolder extends RecyclerView.ViewHolder{
         private ImageView imgFotoCont;
@@ -30,9 +34,10 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
         }
     }
 
-    public ContactoAdapter(ArrayList<Contacto> paContactos)
+    public ContactoAdapter(ArrayList<Contacto> paContactos, Activity paActivity)
     {
         this.goContactos = paContactos;
+        this.ActRecycler = paActivity;
     }
 
     @Override
@@ -43,10 +48,23 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
 
     @Override
     public void onBindViewHolder(ContactoViewHolder holder, int position) {
-        Contacto loContacto = goContactos.get(position);
+        final Contacto loContacto = goContactos.get(position);
         holder.txtNombreCont.setText(loContacto.getNombre());
         holder.txtTelefonoCont.setText(loContacto.getTelefono());
         holder.imgFotoCont.setImageResource(loContacto.getFoto());
+		piPosicion = position;
+
+        holder.imgFotoCont.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+				Intent loIntent = new Intent(ActRecycler, DetalleContacto.class);
+				loIntent.putExtra("psImagenContacto", loContacto.getFoto());
+				loIntent.putExtra("psNombreContacto", loContacto.getNombre());
+				loIntent.putExtra("psTelefonoContacto", loContacto.getTelefono());
+				ActRecycler.startActivity(loIntent);
+            }
+        });
     }
 
     @Override
