@@ -2,6 +2,7 @@ package com.indicode.cpayanf.ejrecycler;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,6 +11,7 @@ public class DetalleContacto extends AppCompatActivity {
     ImageView imgFotoDet;
     TextView txtNombreDet;
     TextView txtTelefonoDet;
+    Toolbar tlbActionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +19,9 @@ public class DetalleContacto extends AppCompatActivity {
         String lsNombre;
         String lsTelefono;
         int liFoto;
+
+        tlbActionBar = findViewById(R.id.tlbActionBar);
+        setSupportActionBar(tlbActionBar);
 
         imgFotoDet = findViewById(R.id.imgFotoDet);
         txtNombreDet = findViewById(R.id.txtNombreDet);

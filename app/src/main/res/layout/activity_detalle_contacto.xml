@@ -6,9 +6,14 @@
     android:layout_height="match_parent"
     tools:context="com.indicode.cpayanf.ejrecycler.DetalleContacto">
 
+	<include android:id="@id/tlbActionBar"
+		layout="@layout/actionbar">
+	</include>
+
 	<LinearLayout
+		app:layout_constraintTop_toBottomOf="@id/tlbActionBar"
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
 		android:orientation="vertical">
 
 		<ImageView

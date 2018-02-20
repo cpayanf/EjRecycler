@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
 
@@ -12,12 +13,16 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView rvwContactos;
     ArrayList<Contacto> gaContactos;
+    Toolbar tlbActionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         gaContactos = new ArrayList<Contacto>();
+
+        tlbActionBar = findViewById(R.id.tlbActionBar);
+        setSupportActionBar(tlbActionBar);
 
         gaContactos.add(new Contacto("Carlos Payan", "817272", "cp@dioash", R.drawable.overwolf500px));
         gaContactos.add(new Contacto("Roberto", "234124", "este@gmail", R.drawable.farmer80));
