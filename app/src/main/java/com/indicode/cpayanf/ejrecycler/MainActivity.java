@@ -61,14 +61,20 @@ public class MainActivity extends AppCompatActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if(item.getItemId() == R.id.mnuOpcSettings) {
-			Toast.makeText(getBaseContext(), "Settings", Toast.LENGTH_SHORT).show();
-		}
-		else if(item.getItemId() == R.id.mnuOpcAbout) {
-			Toast.makeText(getBaseContext(), "About", Toast.LENGTH_SHORT).show();
+    	switch (item.getItemId()) {
+			case R.id.mnuOpcSettings:
+				Toast.makeText(getBaseContext(), "Settings", Toast.LENGTH_SHORT).show();
+				break;
+			case R.id.mnuOpcAbout:
+				Toast.makeText(getBaseContext(), "About", Toast.LENGTH_SHORT).show();
+				break;
+			case R.id.mnuOpcRefresh:
+				InicializarAdaptador(gaContactos);
+				break;
+
 		}
 
-			return super.onOptionsItemSelected(item);
+		return super.onOptionsItemSelected(item);
 	}
 
 
