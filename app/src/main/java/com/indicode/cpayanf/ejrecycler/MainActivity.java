@@ -1,57 +1,40 @@
 package com.indicode.cpayanf.ejrecycler;
 
+import android.support.v4.app.Fragment;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.indicode.cpayanf.ejrecycler.Adapter.PageAdapter;
+import com.indicode.cpayanf.ejrecycler.Fragment.PerfilFragment;
+import com.indicode.cpayanf.ejrecycler.Fragment.RecyclerViewFragment;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView rvwContactos;
-    ArrayList<Contacto> gaContactos;
     Toolbar tlbActionBar;
+    TabLayout tabLayout;
+    ViewPager viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        gaContactos = new ArrayList<Contacto>();
-
         tlbActionBar = findViewById(R.id.tlbActionBar);
         setSupportActionBar(tlbActionBar);
-
-        gaContactos.add(new Contacto("Carlos Payan", "817272", "cp@dioash", R.drawable.overwolf500px));
-        gaContactos.add(new Contacto("Roberto", "234124", "este@gmail", R.drawable.farmer80));
-        gaContactos.add(new Contacto("ale garza", "441231", "correo@dioash", R.drawable.overwolf500px));
-        gaContactos.add(new Contacto("luisa enra", "866342", "algoes@gmail", R.drawable.farmer80));
-
-        rvwContactos = findViewById(R.id.rvwContactos);
-        /***Si se quiere lineal
-        LinearLayoutManager lmgContactos = new LinearLayoutManager(this);
-		 lmgContactos.setOrientation(LinearLayoutManager.VERTICAL);
-		 */
-        //para grid
-		GridLayoutManager lmgContactos = new GridLayoutManager(this, 2);
-
-
-		rvwContactos.setLayoutManager(lmgContactos);
-        InicializarAdaptador(gaContactos);
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
+		setUpViewPager();
     }
 
-    protected void InicializarAdaptador(ArrayList<Contacto> paContactos)
-    {
-        ContactoAdapter cadContactos = new ContactoAdapter(paContactos, this);
-        rvwContactos.setAdapter(cadContactos);
-    }
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -69,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 				Toast.makeText(getBaseContext(), "About", Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.mnuOpcRefresh:
-				InicializarAdaptador(gaContactos);
+				Toast.makeText(getBaseContext(), "Refresh", Toast.LENGTH_SHORT).show();
 				break;
 
 		}
@@ -77,5 +60,21 @@ public class MainActivity extends AppCompatActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	private ArrayList<Fragment> agregarFraments()
+	{
+		ArrayList<Fragment> loFragmentos = new ArrayList<>();
+		loFragmentos.add(new RecyclerViewFragment());
+		loFragmentos.add(new PerfilFragment());
+
+		return loFragmentos;
+	}
+
+	private void setUpViewPager() {
+    	viewPager.setAdapter(new PageAdapter(getSupportFragmentManager(), agregarFraments()));
+    	tabLayout.setupWithViewPager(viewPager);
+
+    	tabLayout.getTabAt(0).setIcon(R.drawable.refresh24);
+		tabLayout.getTabAt(1).setIcon(R.drawable.overwolf500px);
+	}
 
 }
