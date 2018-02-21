@@ -32,6 +32,7 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
             txtNombreCont = itemView.findViewById(R.id.txtNombreCont);
             txtTelefonoCont = itemView.findViewById(R.id.txtTelefonoCont);
         }
+
     }
 
     public ContactoAdapter(ArrayList<Contacto> paContactos, Activity paActivity)

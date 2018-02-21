@@ -16,7 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetalleContacto"></activity>
+        <activity android:name=".DetalleContacto"
+            android:parentActivityName =".MainActivity">
+            <!--soporte para 4.0 a abajo
+            -->
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity">
+            </meta-data>
+        </activity>
     </application>
 
 </manifest>
