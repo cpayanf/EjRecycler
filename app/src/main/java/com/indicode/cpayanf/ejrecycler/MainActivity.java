@@ -1,7 +1,16 @@
 package com.indicode.cpayanf.ejrecycler;
 
+import android.Manifest;
+import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,11 +31,15 @@ public class MainActivity extends AppCompatActivity {
     Toolbar tlbActionBar;
     TabLayout tabLayout;
     ViewPager viewPager;
+    Context myContext;
+    Activity myActiviy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        myContext = getApplicationContext();
+        myActiviy = this;
         tlbActionBar = findViewById(R.id.tlbActionBar);
         setSupportActionBar(tlbActionBar);
         tabLayout = findViewById(R.id.tabLayout);
@@ -77,4 +90,56 @@ public class MainActivity extends AppCompatActivity {
 		tabLayout.getTabAt(1).setIcon(R.drawable.overwolf500px);
 	}
 
+	public void habilitarBluetooth(View v)
+	{
+		solicitarPermiso();
+		BluetoothAdapter myBluetooth = BluetoothAdapter.getDefaultAdapter();
+		if(myBluetooth == null)
+		{
+			Toast.makeText(MainActivity.this, "No tienes bluetooth", Toast.LENGTH_SHORT).show();
+			return;
+		}
+
+		if(!myBluetooth.isEnabled())
+		{
+			Intent habilitarBluetooth = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+			startActivityForResult(habilitarBluetooth, 0);
+		}
+	}
+
+	public boolean checarStatusPermiso()
+	{
+		int liResultado = ContextCompat.checkSelfPermission(myContext, Manifest.permission.BLUETOOTH);
+		if(liResultado == PackageManager.PERMISSION_GRANTED)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	public void solicitarPermiso(){
+    	if (!ActivityCompat.shouldShowRequestPermissionRationale(myActiviy, Manifest.permission.BLUETOOTH))
+		{
+			ActivityCompat.requestPermissions(myActiviy, new String[] {Manifest.permission.BLUETOOTH}, 1);
+		}
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+			@NonNull int[] grantResults) {
+		switch (requestCode){
+			case 1:
+				if(checarStatusPermiso()) {
+					Toast.makeText(MainActivity.this, "Ya esta activo", Toast.LENGTH_SHORT).show();
+				}
+				else
+				{
+					Toast.makeText(MainActivity.this, "No esta activo", Toast.LENGTH_SHORT).show();
+				}
+				break;
+		};
+	}
 }

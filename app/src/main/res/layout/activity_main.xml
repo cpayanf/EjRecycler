@@ -33,5 +33,17 @@
 
 	</android.support.v4.view.ViewPager>
 
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<android.support.design.widget.FloatingActionButton
+			android:id="@+id/fabBluetooth"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|right"
+			android:onClick="habilitarBluetooth"
+			/>
+	</FrameLayout>
 
 </android.support.design.widget.CoordinatorLayout>
