@@ -24,6 +24,9 @@ import com.indicode.cpayanf.ejrecycler.Adapter.PageAdapter;
 import com.indicode.cpayanf.ejrecycler.Fragment.PerfilFragment;
 import com.indicode.cpayanf.ejrecycler.Fragment.RecyclerViewFragment;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -59,13 +62,13 @@ public class MainActivity extends AppCompatActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
     	switch (item.getItemId()) {
 			case R.id.mnuOpcSettings:
-				Toast.makeText(getBaseContext(), "Settings", Toast.LENGTH_SHORT).show();
+				Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.mnuOpcAbout:
-				Toast.makeText(getBaseContext(), "About", Toast.LENGTH_SHORT).show();
+				Toast.makeText(MainActivity.this, "About", Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.mnuOpcRefresh:
-				Toast.makeText(getBaseContext(), "Refresh", Toast.LENGTH_SHORT).show();
+				Toast.makeText(MainActivity.this, "Refresh", Toast.LENGTH_SHORT).show();
 				break;
 
 		}
@@ -141,5 +144,31 @@ public class MainActivity extends AppCompatActivity {
 				}
 				break;
 		};
+	}
+
+	public void generarArchivo(View v)
+	{
+		try{
+			String lsFile = "MiArchivo";
+			String lsContents = "En el archivo";
+			String lsContents2 = ".\r\nEn el archivo";
+			byte[] laBytes = new byte[100];
+			FileOutputStream myFile = null;
+			myFile = openFileOutput(lsFile, Context.MODE_PRIVATE);
+			myFile.write(lsContents.getBytes());
+			myFile.write(lsContents2.getBytes());
+			myFile.close();
+			Toast.makeText(MainActivity.this, "Archivo creado ", Toast.LENGTH_SHORT).show();
+			FileInputStream readFile = openFileInput(lsFile);
+			lsContents = "";
+			readFile.read(laBytes);
+			lsContents = new String(laBytes, StandardCharsets.UTF_8);
+			readFile.close();
+			Toast.makeText(MainActivity.this, lsContents, Toast.LENGTH_SHORT).show();
+		}
+		catch(Exception ex)
+		{
+			Toast.makeText(MainActivity.this, "Error al escribir. " + ex.getMessage(), Toast.LENGTH_SHORT).show();
+		}
 	}
 }
