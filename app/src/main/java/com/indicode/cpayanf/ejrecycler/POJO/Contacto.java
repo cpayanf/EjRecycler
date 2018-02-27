@@ -10,6 +10,16 @@ public class Contacto{
     private String telefono;
     private String email;
 
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    private int likes;
+
     public int getFoto() {
         return foto;
     }
@@ -48,6 +58,7 @@ public class Contacto{
         this.telefono = telefono;
         this.email = email;
         this.foto = foto;
+        this.likes = 0;
     }
 
 }

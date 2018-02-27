@@ -28,12 +28,14 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
         private ImageView imgFotoCont;
         private TextView txtNombreCont;
         private TextView txtTelefonoCont;
+        private TextView txtLikesCont;
 
         public ContactoViewHolder(View itemView) {
             super(itemView);
             imgFotoCont = itemView.findViewById(R.id.imgFotoCont);
             txtNombreCont = itemView.findViewById(R.id.txtNombreCont);
             txtTelefonoCont = itemView.findViewById(R.id.txtTelefonoCont);
+            txtLikesCont = itemView.findViewById(R.id.txtLikesCont);
         }
 
     }
@@ -56,6 +58,7 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
         holder.txtNombreCont.setText(loContacto.getNombre());
         holder.txtTelefonoCont.setText(loContacto.getTelefono());
         holder.imgFotoCont.setImageResource(loContacto.getFoto());
+        holder.txtLikesCont.setText(loContacto.getLikes() + " Likes");
 		piPosicion = position;
 
         holder.imgFotoCont.setOnClickListener(new View.OnClickListener()
@@ -66,6 +69,7 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
 				loIntent.putExtra("psImagenContacto", loContacto.getFoto());
 				loIntent.putExtra("psNombreContacto", loContacto.getNombre());
 				loIntent.putExtra("psTelefonoContacto", loContacto.getTelefono());
+                loIntent.putExtra("piLikesContacto", loContacto.getLikes());
 				ActRecycler.startActivity(loIntent);
             }
         });

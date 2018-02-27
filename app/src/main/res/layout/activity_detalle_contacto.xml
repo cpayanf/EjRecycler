@@ -38,6 +38,12 @@
 			android:layout_height="wrap_content"
 			android:text="Telefono"
 			android:textSize="14sp"/>
+		<TextView
+			android:id="@+id/txtLikesDet"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="0 Likes"
+			android:textSize="14sp"/>
 	</LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

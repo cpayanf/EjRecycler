@@ -16,6 +16,7 @@ public class DetalleContacto extends AppCompatActivity {
     ImageView imgFotoDet;
     TextView txtNombreDet;
     TextView txtTelefonoDet;
+    TextView txtLikesDet;
     Toolbar tlbActionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class DetalleContacto extends AppCompatActivity {
         String lsNombre;
         String lsTelefono;
         int liFoto;
+        int liLikes;
 
         tlbActionBar = findViewById(R.id.tlbActionBar);
         setSupportActionBar(tlbActionBar);
@@ -32,6 +34,7 @@ public class DetalleContacto extends AppCompatActivity {
         imgFotoDet = findViewById(R.id.imgFotoDet);
         txtNombreDet = findViewById(R.id.txtNombreDet);
         txtTelefonoDet = findViewById(R.id.txtTelefonoDet);
+        txtLikesDet = findViewById(R.id.txtLikesDet);
         registerForContextMenu(txtNombreDet);
 
         Bundle loParams = getIntent().getExtras();
@@ -40,10 +43,12 @@ public class DetalleContacto extends AppCompatActivity {
             lsNombre = loParams.getString("psNombreContacto");
             lsTelefono = loParams.getString("psTelefonoContacto");
             liFoto = loParams.getInt("psImagenContacto");
+            liLikes = loParams.getInt("piLikesContacto");
 
             imgFotoDet.setImageResource(liFoto);
             txtNombreDet.setText(lsNombre);
             txtTelefonoDet.setText(lsTelefono);
+            txtLikesDet.setText(liLikes + " Likes");
         }
     }
 
@@ -71,7 +76,7 @@ public class DetalleContacto extends AppCompatActivity {
     public void LevantaMenuPopUp(View v)
 	{
 		ImageView loimgContacto = findViewById(R.id.imgFotoDet);
-		final PopupMenu mnuPupImagen = new PopupMenu(this, loimgContacto);
+		/*final PopupMenu mnuPupImagen = new PopupMenu(this, loimgContacto);
 		mnuPupImagen.getMenuInflater().inflate(R.menu.menu_popup, mnuPupImagen.getMenu());
 		mnuPupImagen.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 			@Override
@@ -89,5 +94,6 @@ public class DetalleContacto extends AppCompatActivity {
 			}
 		});
 		mnuPupImagen.show();
+		*/
 	}
 }

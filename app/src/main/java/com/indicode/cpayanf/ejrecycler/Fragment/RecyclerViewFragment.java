@@ -10,6 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.indicode.cpayanf.ejrecycler.Adapter.ContactoAdapter;
+import com.indicode.cpayanf.ejrecycler.BD.BDContacto;
+import com.indicode.cpayanf.ejrecycler.Interfases.IRecyclerViewFragmentPresenter;
+import com.indicode.cpayanf.ejrecycler.Interfases.IRecyclerViewFragmentView;
+import com.indicode.cpayanf.ejrecycler.Interfases.RecyclerViewFragmentPresenter;
 import com.indicode.cpayanf.ejrecycler.POJO.Contacto;
 import com.indicode.cpayanf.ejrecycler.R;
 
@@ -19,9 +23,10 @@ import java.util.ArrayList;
  * Created by cpayan on 21/02/18.
  */
 
-public class RecyclerViewFragment extends Fragment {
+public class RecyclerViewFragment extends Fragment implements IRecyclerViewFragmentView {
 	RecyclerView rvwContactos;
-	ArrayList<Contacto> gaContactos;
+	IRecyclerViewFragmentPresenter myPresenter;
+	BDContacto myBD;
 
 	public RecyclerViewFragment()
 	{
@@ -36,23 +41,28 @@ public class RecyclerViewFragment extends Fragment {
 		View v = inflater.inflate(R.layout.fragment_recyclerview, container, false);
 
 		rvwContactos = v.findViewById(R.id.rvwContactos);
+		myPresenter = new RecyclerViewFragmentPresenter(this, getContext());
+		myPresenter.obtenerContactosBaseDatos();
 		//para grid
-		GridLayoutManager lmgContactos = new GridLayoutManager(getActivity(), 2);
 
-		gaContactos = new ArrayList<Contacto>();
-		gaContactos.add(new Contacto("Carlos Payan", "817272", "cp@dioash", R.drawable.overwolf500px));
-		gaContactos.add(new Contacto("Roberto", "234124", "este@gmail", R.drawable.farmer80));
-		gaContactos.add(new Contacto("ale garza", "441231", "correo@dioash", R.drawable.overwolf500px));
-		gaContactos.add(new Contacto("luisa enra", "866342", "algoes@gmail", R.drawable.farmer80));
-
-		rvwContactos.setLayoutManager(lmgContactos);
-		InicializarAdaptador(gaContactos);
+		generarRecyclerLayout();
 		return v;
 	}
 
-	protected void InicializarAdaptador(ArrayList<Contacto> paContactos)
-	{
+	@Override
+	public void generarRecyclerLayout() {
+		GridLayoutManager lmgContactos = new GridLayoutManager(getActivity(), 2);
+		rvwContactos.setLayoutManager(lmgContactos);
+	}
+
+	@Override
+	public ContactoAdapter crearAdaptador(ArrayList<Contacto> paContactos) {
 		ContactoAdapter cadContactos = new ContactoAdapter(paContactos, getActivity());
-		rvwContactos.setAdapter(cadContactos);
+		return cadContactos;
+	}
+
+	@Override
+	public void InicializarAdapter(ContactoAdapter poAdaptador) {
+		rvwContactos.setAdapter(poAdaptador);
 	}
 }
