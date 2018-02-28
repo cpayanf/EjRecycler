@@ -22,6 +22,19 @@
 			>
 
 		</Button>
+
+		<Button android:id="@+id/btnLogLlamadas"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="LogLlamadas"
+			>
+
+		</Button>
+		<TextView
+			android:id="@+id/lblLogLlamadas"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:text="Log" />
 	</LinearLayout>
 
 </FrameLayout>
