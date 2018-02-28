@@ -22,7 +22,7 @@
 			android:layout_height="120dp"
 			android:src="@drawable/overwolf500px"
 			android:scaleType="fitCenter"
-			android:onClick="LevantaMenuPopUp"
+			android:onClick="IncrementaLikes"
 			/>
 
 		<TextView

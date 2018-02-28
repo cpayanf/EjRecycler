@@ -66,6 +66,7 @@ public class ContactoAdapter extends RecyclerView.Adapter<ContactoAdapter.Contac
             @Override
             public void onClick(View view) {
 				Intent loIntent = new Intent(ActRecycler, DetalleContacto.class);
+				loIntent.putExtra("piCodContacto", loContacto.getiCodContacto());
 				loIntent.putExtra("psImagenContacto", loContacto.getFoto());
 				loIntent.putExtra("psNombreContacto", loContacto.getNombre());
 				loIntent.putExtra("psTelefonoContacto", loContacto.getTelefono());

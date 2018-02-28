@@ -1,5 +1,6 @@
 package com.indicode.cpayanf.ejrecycler.BD;
 
+import android.content.ContentValues;
 import android.content.Context;
 
 import com.indicode.cpayanf.ejrecycler.POJO.Contacto;
@@ -20,12 +21,43 @@ public class ConstructorContactos {
 	}
 
 	public ArrayList<Contacto> obtenerContactos(){
-		ArrayList<Contacto>	laContactos = new ArrayList<Contacto>();
-		laContactos.add(new Contacto("Carlos Payan", "817272", "cp@dioash", R.drawable.overwolf500px));
-		laContactos.add(new Contacto("Roberto", "234124", "este@gmail", R.drawable.farmer80));
-		laContactos.add(new Contacto("ale garza", "441231", "correo@dioash", R.drawable.overwolf500px));
-		laContactos.add(new Contacto("luisa enra", "866342", "algoes@gmail", R.drawable.farmer80));
+		BDContacto db = new BDContacto(myContext);
+		//InsertaContactosDummy(db);
+		return db.obtenerContactos();
+	}
+	public int IncrementaLikeContacto(int piCodContacto){
+		BDContacto db = new BDContacto(myContext);
+		return db.IncrementaLikeContacto(piCodContacto);
+	}
 
-		return laContactos;
+	public void InsertaContactosDummy(BDContacto db)
+	{
+		ContentValues loContValues = new ContentValues();
+		loContValues.put("vchNombre", "Carlos Payan");
+		loContValues.put("vchTelefono", "8212312");
+		loContValues.put("vchEmail", "cpayan@fsdlj.com");
+		loContValues.put("iFoto", R.drawable.overwolf500px);
+		db.InsertaContacto(loContValues);
+
+		loContValues = new ContentValues();
+		loContValues.put("vchNombre", "Jorge Ramirez");
+		loContValues.put("vchTelefono", "721922");
+		loContValues.put("vchEmail", "jorge@fsdlj.com");
+		loContValues.put("iFoto", R.drawable.farmer80);
+		db.InsertaContacto(loContValues);
+
+		loContValues = new ContentValues();
+		loContValues.put("vchNombre", "Leslie");
+		loContValues.put("vchTelefono", "9991212");
+		loContValues.put("vchEmail", "jorge@fsdlj.com");
+		loContValues.put("iFoto", R.drawable.overwolf500px);
+		db.InsertaContacto(loContValues);
+
+		loContValues = new ContentValues();
+		loContValues.put("vchNombre", "Jessy");
+		loContValues.put("vchTelefono", "5552341");
+		loContValues.put("vchEmail", "jessy@fsdlj.com");
+		loContValues.put("iFoto", R.drawable.farmer80);
+		db.InsertaContacto(loContValues);
 	}
 }

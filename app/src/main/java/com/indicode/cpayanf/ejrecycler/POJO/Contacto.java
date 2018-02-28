@@ -5,11 +5,21 @@ package com.indicode.cpayanf.ejrecycler.POJO;
  */
 
 public class Contacto{
+
+
+    private int iCodContacto;
     private int foto;
     private String nombre;
     private String telefono;
     private String email;
 
+    public int getiCodContacto() {
+        return iCodContacto;
+    }
+
+    public void setiCodContacto(int iCodContacto) {
+        this.iCodContacto = iCodContacto;
+    }
     public int getLikes() {
         return likes;
     }
@@ -52,6 +62,11 @@ public class Contacto{
         this.email = email;
     }
 
+
+    public Contacto(int piCodContacto)
+    {
+        this.iCodContacto = piCodContacto;
+    }
 
     public Contacto(String nombre, String telefono, String email, int foto){
         this.nombre = nombre;

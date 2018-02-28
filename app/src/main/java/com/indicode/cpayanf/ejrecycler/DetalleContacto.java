@@ -11,9 +11,12 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.indicode.cpayanf.ejrecycler.BD.ConstructorContactos;
+
 public class DetalleContacto extends AppCompatActivity {
 
-    ImageView imgFotoDet;
+	int giCodContacto;
+	ImageView imgFotoDet;
     TextView txtNombreDet;
     TextView txtTelefonoDet;
     TextView txtLikesDet;
@@ -40,6 +43,7 @@ public class DetalleContacto extends AppCompatActivity {
         Bundle loParams = getIntent().getExtras();
         if(loParams != null)
         {
+			giCodContacto = loParams.getInt("piCodContacto");
             lsNombre = loParams.getString("psNombreContacto");
             lsTelefono = loParams.getString("psTelefonoContacto");
             liFoto = loParams.getInt("psImagenContacto");
@@ -73,10 +77,24 @@ public class DetalleContacto extends AppCompatActivity {
         return super.onContextItemSelected(item);
     }
 
+    public void IncrementaLikes(View v)
+    {
+    	int liLikes;
+    	try {
+			ConstructorContactos loConstContactos = new ConstructorContactos(getBaseContext());
+			liLikes = loConstContactos.IncrementaLikeContacto(giCodContacto);
+			txtLikesDet.setText(liLikes + " Likes");
+		}
+		catch(Exception ex) {
+			Toast.makeText(getBaseContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
+		}
+
+    }
+
     public void LevantaMenuPopUp(View v)
 	{
 		ImageView loimgContacto = findViewById(R.id.imgFotoDet);
-		/*final PopupMenu mnuPupImagen = new PopupMenu(this, loimgContacto);
+		final PopupMenu mnuPupImagen = new PopupMenu(this, loimgContacto);
 		mnuPupImagen.getMenuInflater().inflate(R.menu.menu_popup, mnuPupImagen.getMenu());
 		mnuPupImagen.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
 			@Override
@@ -94,6 +112,6 @@ public class DetalleContacto extends AppCompatActivity {
 			}
 		});
 		mnuPupImagen.show();
-		*/
+
 	}
 }
